@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -27,7 +26,7 @@ private fun AIIcon(
     name: String,
     modifier: Modifier = Modifier,
     loading: Boolean = false,
-    color: Color = MaterialTheme.colorScheme.secondaryContainer,
+    color: Color = Color(0x00000000),
 ) {
     val contentColor = LocalContentColor.current
     val context = LocalContext.current
@@ -61,7 +60,7 @@ fun AutoAIIcon(
     name: String,
     modifier: Modifier = Modifier,
     loading: Boolean = false,
-    color: Color = MaterialTheme.colorScheme.secondaryContainer,
+    color: Color = Color(0x00000000),
 ) {
     val path = remember(name) { computeAIIconByName(name) } ?: run {
         TextAvatar(text = name, modifier = modifier, loading = loading, color = color)

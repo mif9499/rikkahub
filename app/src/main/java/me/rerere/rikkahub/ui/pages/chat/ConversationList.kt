@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -50,12 +49,14 @@ import com.composables.icons.lucide.PinOff
 import com.composables.icons.lucide.RefreshCw
 import com.composables.icons.lucide.Trash2
 import com.composables.icons.lucide.X
+import com.kyant.capsule.ContinuousRoundedRectangle
 import me.rerere.rikkahub.R
 import me.rerere.rikkahub.Screen
 import me.rerere.rikkahub.data.model.Conversation
 import me.rerere.rikkahub.ui.components.ui.Tooltip
 import me.rerere.rikkahub.ui.context.LocalNavController
 import me.rerere.rikkahub.ui.theme.extendColors
+import me.rerere.rikkahub.ui.theme.presets.g2
 import me.rerere.rikkahub.utils.toLocalString
 import java.time.LocalDate
 import java.time.ZoneId
@@ -91,7 +92,7 @@ fun ColumnScope.ConversationList(
             },
             modifier = Modifier
                 .weight(1f),
-            shape = RoundedCornerShape(50),
+            shape = ContinuousRoundedRectangle(50, g2),
             trailingIcon = {
                 AnimatedVisibility(searchInput.isNotEmpty()) {
                     IconButton(
@@ -168,7 +169,7 @@ fun ColumnScope.ConversationList(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(16.dp),
-                    shape = RoundedCornerShape(8.dp),
+                    shape = ContinuousRoundedRectangle(8.dp, g2),
                     color = MaterialTheme.colorScheme.surfaceContainerLow
                 ) {
                     Text(
@@ -308,7 +309,7 @@ private fun ConversationItem(
     }
     Box(
         modifier = modifier
-            .clip(RoundedCornerShape(50f))
+            .clip(ContinuousRoundedRectangle(50f))
             .combinedClickable(
                 interactionSource = interactionSource,
                 indication = LocalIndication.current,

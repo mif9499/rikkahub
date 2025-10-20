@@ -48,6 +48,7 @@ import com.composables.icons.lucide.Share
 import com.composables.icons.lucide.TextSelect
 import com.composables.icons.lucide.Trash2
 import com.composables.icons.lucide.Volume2
+import com.kyant.capsule.ContinuousRoundedRectangle
 import kotlinx.coroutines.delay
 import kotlinx.datetime.toJavaLocalDateTime
 import me.rerere.ai.core.MessageRole
@@ -57,6 +58,7 @@ import me.rerere.ai.ui.UIMessagePart
 import me.rerere.rikkahub.R
 import me.rerere.rikkahub.data.model.MessageNode
 import me.rerere.rikkahub.ui.context.LocalTTSState
+import me.rerere.rikkahub.ui.theme.presets.g2
 import me.rerere.rikkahub.utils.copyMessageToClipboard
 import me.rerere.rikkahub.utils.toLocalString
 import java.util.Locale
@@ -203,11 +205,12 @@ fun ChatMessageActionsSheet(
     ModalBottomSheet(
         onDismissRequest = onDismissRequest,
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+        shape = ContinuousRoundedRectangle(32.dp, g2)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
@@ -217,7 +220,7 @@ fun ChatMessageActionsSheet(
                     onDismissRequest()
                     onSelectAndCopy()
                 },
-                shape = MaterialTheme.shapes.medium
+                shape = ContinuousRoundedRectangle(20.dp, g2)
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -248,7 +251,7 @@ fun ChatMessageActionsSheet(
                         onDismissRequest()
                         onWebViewPreview()
                     },
-                    shape = MaterialTheme.shapes.medium
+                    shape = ContinuousRoundedRectangle(20.dp, g2)
                 ) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
@@ -276,7 +279,7 @@ fun ChatMessageActionsSheet(
                     onDismissRequest()
                     onEdit()
                 },
-                shape = MaterialTheme.shapes.medium
+                shape = ContinuousRoundedRectangle(20.dp, g2)
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -303,7 +306,7 @@ fun ChatMessageActionsSheet(
                     onDismissRequest()
                     onShare()
                 },
-                shape = MaterialTheme.shapes.medium,
+                shape = ContinuousRoundedRectangle(20.dp, g2)
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -330,7 +333,7 @@ fun ChatMessageActionsSheet(
                     onDismissRequest()
                     onFork()
                 },
-                shape = MaterialTheme.shapes.medium,
+                shape = ContinuousRoundedRectangle(20.dp, g2)
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -357,7 +360,7 @@ fun ChatMessageActionsSheet(
                     onDismissRequest()
                     onDelete()
                 },
-                shape = MaterialTheme.shapes.medium,
+                shape = ContinuousRoundedRectangle(20.dp, g2),
                 colors = CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.errorContainer
                 )

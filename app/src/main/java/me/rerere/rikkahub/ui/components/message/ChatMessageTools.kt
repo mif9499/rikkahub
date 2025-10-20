@@ -45,6 +45,7 @@ import com.composables.icons.lucide.Earth
 import com.composables.icons.lucide.Lucide
 import com.composables.icons.lucide.Trash2
 import com.composables.icons.lucide.Wrench
+import com.kyant.capsule.ContinuousRoundedRectangle
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
@@ -64,6 +65,7 @@ import me.rerere.rikkahub.ui.components.ui.FaviconRow
 import me.rerere.rikkahub.ui.components.ui.FormItem
 import me.rerere.rikkahub.ui.context.LocalNavController
 import me.rerere.rikkahub.ui.modifier.shimmer
+import me.rerere.rikkahub.ui.theme.presets.g2
 import me.rerere.rikkahub.utils.JsonInstantPretty
 import me.rerere.rikkahub.utils.jsonPrimitiveOrNull
 import org.koin.compose.koinInject
@@ -81,7 +83,7 @@ fun ToolCallItem(
         onClick = {
             showResult = true
         },
-        shape = MaterialTheme.shapes.large,
+        shape = ContinuousRoundedRectangle(16.dp, g2),
         color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
         contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
     ) {
@@ -218,6 +220,7 @@ private fun ToolCallPreviewSheet(
     val memoryId = (content as? JsonObject)?.get("id")?.jsonPrimitiveOrNull?.intOrNull
 
     ModalBottomSheet(
+        shape = ContinuousRoundedRectangle(topStart = 32.dp, topEnd = 32.dp, continuity = g2),
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         onDismissRequest = {
             onDismissRequest()
@@ -226,7 +229,7 @@ private fun ToolCallPreviewSheet(
             Column(
                 modifier = Modifier
                     .fillMaxHeight(0.8f)
-                    .padding(16.dp)
+                    .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
                     .verticalScroll(rememberScrollState()),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {

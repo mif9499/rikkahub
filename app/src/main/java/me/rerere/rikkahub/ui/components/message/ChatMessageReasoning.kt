@@ -24,11 +24,8 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -56,6 +53,7 @@ import com.composables.icons.lucide.ChevronDown
 import com.composables.icons.lucide.ChevronUp
 import com.composables.icons.lucide.Expand
 import com.composables.icons.lucide.Lucide
+import com.kyant.capsule.ContinuousRoundedRectangle
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import me.rerere.ai.provider.Model
@@ -68,6 +66,7 @@ import me.rerere.rikkahub.data.model.replaceRegexes
 import me.rerere.rikkahub.ui.components.richtext.MarkdownBlock
 import me.rerere.rikkahub.ui.context.LocalSettings
 import me.rerere.rikkahub.ui.modifier.shimmer
+import me.rerere.rikkahub.ui.theme.presets.g2
 import me.rerere.rikkahub.utils.extractGeminiThinkingTitle
 import kotlin.time.Clock
 import kotlin.time.Duration.Companion.seconds
@@ -134,7 +133,7 @@ fun ChatMessageReasoning(
 
     Surface(
         modifier = modifier,
-        shape = MaterialTheme.shapes.large,
+        shape = ContinuousRoundedRectangle(16.dp, g2),
         color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
         contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
     ) {
@@ -146,7 +145,7 @@ fun ChatMessageReasoning(
         ) {
             Row(
                 modifier = Modifier
-                    .clip(MaterialTheme.shapes.small)
+                    .clip(ContinuousRoundedRectangle(8.dp, g2))
                     .let { if (expandState.expanded) it.fillMaxWidth() else it.wrapContentWidth() }
                     .clickable(
                         onClick = {

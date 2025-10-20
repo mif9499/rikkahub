@@ -48,8 +48,10 @@ import com.composables.icons.lucide.ChevronUp
 import com.composables.icons.lucide.Languages
 import com.composables.icons.lucide.Lucide
 import com.composables.icons.lucide.X
+import com.kyant.capsule.ContinuousRoundedRectangle
 import me.rerere.rikkahub.R
 import me.rerere.rikkahub.ui.components.richtext.MarkdownBlock
+import me.rerere.rikkahub.ui.theme.presets.g2
 import java.util.Locale
 
 @Composable
@@ -91,13 +93,14 @@ fun LanguageSelectionDialog(
     }
 
     ModalBottomSheet(
+        shape = ContinuousRoundedRectangle(topStart = 32.dp, topEnd = 32.dp, continuity = g2),
         onDismissRequest = onDismissRequest,
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             // 标题
@@ -117,7 +120,7 @@ fun LanguageSelectionDialog(
                         onClick = {
                             onLanguageSelected(language)
                         },
-                        shape = MaterialTheme.shapes.medium
+                        shape = ContinuousRoundedRectangle(20.dp, g2)
                     ) {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
@@ -144,7 +147,7 @@ fun LanguageSelectionDialog(
                         onClick = {
                             onClearTranslation()
                         },
-                        shape = MaterialTheme.shapes.medium
+                        shape = ContinuousRoundedRectangle(20.dp, g2)
                     ) {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,

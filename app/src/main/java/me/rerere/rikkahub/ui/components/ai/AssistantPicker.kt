@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FilterChip
@@ -41,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import com.composables.icons.lucide.Bot
 import com.composables.icons.lucide.Lucide
 import com.composables.icons.lucide.Pen
+import com.kyant.capsule.ContinuousRoundedRectangle
 import kotlinx.coroutines.launch
 import me.rerere.rikkahub.R
 import me.rerere.rikkahub.Screen
@@ -49,7 +49,7 @@ import me.rerere.rikkahub.data.model.Assistant
 import me.rerere.rikkahub.ui.components.ui.UIAvatar
 import me.rerere.rikkahub.ui.context.LocalNavController
 import me.rerere.rikkahub.ui.hooks.rememberAssistantState
-import me.rerere.rikkahub.ui.modifier.onClick
+import me.rerere.rikkahub.ui.theme.presets.g2
 import kotlin.uuid.Uuid
 
 @Composable
@@ -89,7 +89,7 @@ fun AssistantPicker(
         onClick = {
             showPicker = true
         },
-        modifier = modifier,
+        modifier = modifier.height(48.dp),
         selected = false,
     )
 
@@ -136,12 +136,13 @@ private fun AssistantPickerSheet(
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = sheetState,
+        shape = ContinuousRoundedRectangle(32.dp, g2)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.8f)
-                .padding(16.dp),
+                .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Text(
@@ -167,7 +168,7 @@ private fun AssistantPickerSheet(
                             },
                             label = { Text(tag.name) },
                             selected = tag.id in selectedTagIds,
-                            shape = RoundedCornerShape(50),
+                            shape = ContinuousRoundedRectangle(50),
                         )
                     }
                 }
@@ -185,7 +186,7 @@ private fun AssistantPickerSheet(
                     Card(
                         onClick = { onAssistantSelected(assistant) },
                         modifier = Modifier.animateItem(),
-                        shape = MaterialTheme.shapes.large,
+                        shape =ContinuousRoundedRectangle(20.dp, g2),
                         colors = CardDefaults.cardColors(
                             containerColor = if (checked) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surface,
                             contentColor = if (checked) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface,

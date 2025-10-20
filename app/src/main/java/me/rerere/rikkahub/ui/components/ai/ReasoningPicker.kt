@@ -36,9 +36,11 @@ import com.composables.icons.lucide.Lightbulb
 import com.composables.icons.lucide.LightbulbOff
 import com.composables.icons.lucide.Lucide
 import com.composables.icons.lucide.Sparkle
+import com.kyant.capsule.ContinuousRoundedRectangle
 import me.rerere.ai.core.ReasoningLevel
 import me.rerere.rikkahub.R
 import me.rerere.rikkahub.ui.components.ui.ToggleSurface
+import me.rerere.rikkahub.ui.theme.presets.g2
 
 @Composable
 fun ReasoningButton(
@@ -96,11 +98,12 @@ fun ReasoningPicker(
             onDismissRequest()
         },
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+        shape = ContinuousRoundedRectangle(32.dp, g2)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
@@ -182,6 +185,7 @@ fun ReasoningPicker(
 
             Card(
                 modifier = Modifier.imePadding(),
+                shape = ContinuousRoundedRectangle(20.dp, g2)
             ) {
                 Column(
                     modifier = Modifier.padding(16.dp),
@@ -191,6 +195,7 @@ fun ReasoningPicker(
                         mutableStateOf(reasoningTokens.toString())
                     }
                     OutlinedTextField(
+                        shape = ContinuousRoundedRectangle(20.dp, g2),
                         value = input,
                         onValueChange = { newValue ->
                             input = newValue
@@ -238,6 +243,7 @@ private fun ReasoningLevelCard(
             contentColor = textColor.value,
         ),
         modifier = modifier,
+        shape = ContinuousRoundedRectangle(20.dp, g2)
     ) {
         Row(
             modifier = Modifier

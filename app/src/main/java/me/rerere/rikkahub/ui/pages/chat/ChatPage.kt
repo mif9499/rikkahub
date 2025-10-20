@@ -230,7 +230,7 @@ private fun ChatPageContent(
     }
 
     Surface(
-        color = MaterialTheme.colorScheme.background,
+        color = MaterialTheme.colorScheme.surface,
         modifier = Modifier.fillMaxSize()
     ) {
         AssistantBackground(setting = setting)

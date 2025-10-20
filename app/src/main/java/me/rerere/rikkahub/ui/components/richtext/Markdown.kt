@@ -221,7 +221,7 @@ fun MarkdownBlock(
     val (preprocessed, astTree) = data
     ProvideTextStyle(style) {
         Column(
-            modifier = modifier.padding(start = 4.dp)
+            modifier = modifier.padding(horizontal = 4.dp)
         ) {
             astTree.children.fastForEach { child ->
                 MarkdownNode(

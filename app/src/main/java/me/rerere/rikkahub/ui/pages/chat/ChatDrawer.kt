@@ -1,30 +1,23 @@
 package me.rerere.rikkahub.ui.pages.chat
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
-import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.OutlinedCard
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -36,16 +29,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.composables.icons.lucide.Download
 import com.composables.icons.lucide.Lucide
-import com.composables.icons.lucide.Pencil
 import com.composables.icons.lucide.Settings2
 import com.dokar.sonner.ToastType
+import com.kyant.capsule.ContinuousRoundedRectangle
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import me.rerere.rikkahub.BuildConfig
@@ -56,21 +48,16 @@ import me.rerere.rikkahub.data.model.Conversation
 import me.rerere.rikkahub.data.repository.ConversationRepository
 import me.rerere.rikkahub.ui.components.ai.AssistantPicker
 import me.rerere.rikkahub.ui.components.richtext.MarkdownBlock
-import me.rerere.rikkahub.ui.components.ui.Greeting
-import me.rerere.rikkahub.ui.components.ui.UIAvatar
 import me.rerere.rikkahub.ui.context.LocalToaster
-import me.rerere.rikkahub.ui.hooks.EditStateContent
 import me.rerere.rikkahub.ui.hooks.readBooleanPreference
 import me.rerere.rikkahub.ui.hooks.rememberIsPlayStoreVersion
-import me.rerere.rikkahub.ui.hooks.useEditState
 import me.rerere.rikkahub.ui.hooks.useThrottle
-import me.rerere.rikkahub.ui.modifier.onClick
+import me.rerere.rikkahub.ui.theme.presets.g2
 import me.rerere.rikkahub.utils.UpdateDownload
 import me.rerere.rikkahub.utils.Version
 import me.rerere.rikkahub.utils.navigateToChatPage
 import me.rerere.rikkahub.utils.onError
 import me.rerere.rikkahub.utils.onSuccess
-import me.rerere.rikkahub.utils.toDp
 import me.rerere.rikkahub.utils.toLocalDateTime
 import org.koin.compose.koinInject
 import kotlin.time.ExperimentalTime
@@ -95,83 +82,16 @@ fun ChatDrawerContent(
         initialValue = emptyMap(),
     )
 
-    // 昵称编辑状态
-    val nicknameEditState = useEditState<String> { newNickname ->
-        vm.updateSettings(
-            settings.copy(
-                displaySetting = settings.displaySetting.copy(
-                    userNickname = newNickname
-                )
-            )
-        )
-    }
-
     ModalDrawerSheet(
-        modifier = Modifier.width(300.dp)
+        modifier = Modifier.width(300.dp),
+        drawerShape = ContinuousRoundedRectangle(topEnd = 32.dp, bottomEnd = 32.dp, continuity = g2),
     ) {
         Column(
             modifier = Modifier.padding(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             if (settings.displaySetting.showUpdates && !isPlayStore) {
                 UpdateCard(vm)
-            }
-
-            // 用户头像和昵称自定义区域
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 8.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-            ) {
-                UIAvatar(
-                    name = settings.displaySetting.userNickname.ifBlank { stringResource(R.string.user_default_name) },
-                    value = settings.displaySetting.userAvatar,
-                    onUpdate = { newAvatar ->
-                        vm.updateSettings(
-                            settings.copy(
-                                displaySetting = settings.displaySetting.copy(
-                                    userAvatar = newAvatar
-                                )
-                            )
-                        )
-                    },
-                    modifier = Modifier.size(50.dp),
-                )
-
-                Column(
-                    modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(2.dp),
-                ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(4.dp),
-                    ) {
-                        Text(
-                            text = settings.displaySetting.userNickname.ifBlank { stringResource(R.string.user_default_name) },
-                            style = MaterialTheme.typography.titleMedium,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                            modifier = Modifier.clickable {
-                                nicknameEditState.open(settings.displaySetting.userNickname)
-                            }
-                        )
-
-                        Icon(
-                            imageVector = Lucide.Pencil,
-                            contentDescription = "Edit",
-                            modifier = Modifier
-                                .onClick {
-                                    nicknameEditState.open(settings.displaySetting.userNickname)
-                                }
-                                .size(LocalTextStyle.current.fontSize.toDp())
-                        )
-                    }
-                    Greeting(
-                        style = MaterialTheme.typography.labelMedium,
-                    )
-                }
             }
 
             ConversationList(
@@ -230,48 +150,10 @@ fun ChatDrawerContent(
                 onClick = {
                     navController.navigate(Screen.Setting)
                 },
-                selected = false
+                selected = false,
+                modifier = Modifier.height(48.dp)
             )
         }
-    }
-
-    // 昵称编辑对话框
-    nicknameEditState.EditStateContent { nickname, onUpdate ->
-        AlertDialog(
-            onDismissRequest = {
-                nicknameEditState.dismiss()
-            },
-            title = {
-                Text(stringResource(R.string.chat_page_edit_nickname))
-            },
-            text = {
-                OutlinedTextField(
-                    value = nickname,
-                    onValueChange = onUpdate,
-                    modifier = Modifier.fillMaxWidth(),
-                    singleLine = true,
-                    placeholder = { Text(stringResource(R.string.chat_page_nickname_placeholder)) }
-                )
-            },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        nicknameEditState.confirm()
-                    }
-                ) {
-                    Text(stringResource(R.string.chat_page_save))
-                }
-            },
-            dismissButton = {
-                TextButton(
-                    onClick = {
-                        nicknameEditState.dismiss()
-                    }
-                ) {
-                    Text(stringResource(R.string.chat_page_cancel))
-                }
-            }
-        )
     }
 }
 

@@ -63,6 +63,8 @@ import com.composables.icons.lucide.Image
 import com.composables.icons.lucide.Lucide
 import com.composables.icons.lucide.Wrench
 import com.dokar.sonner.ToastType
+import com.kyant.capsule.ContinuousCapsule
+import com.kyant.capsule.ContinuousRoundedRectangle
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -89,6 +91,7 @@ import me.rerere.rikkahub.ui.context.LocalNavController
 import me.rerere.rikkahub.ui.context.LocalSettings
 import me.rerere.rikkahub.ui.context.LocalToaster
 import me.rerere.rikkahub.ui.theme.RikkahubTheme
+import me.rerere.rikkahub.ui.theme.presets.g2
 import me.rerere.rikkahub.utils.JsonInstant
 import me.rerere.rikkahub.utils.exportImage
 import me.rerere.rikkahub.utils.getActivity
@@ -118,11 +121,12 @@ fun ChatExportSheet(
         ModalBottomSheet(
             onDismissRequest = onDismissRequest,
             sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+            shape = ContinuousRoundedRectangle(32.dp, g2)
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 32.dp),
+                    .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
@@ -131,6 +135,7 @@ fun ChatExportSheet(
                 val markdownSuccessMessage =
                     stringResource(id = R.string.chat_page_export_success, "Markdown")
                 OutlinedCard(
+                    shape = ContinuousRoundedRectangle(20.dp, g2),
                     onClick = {
                         exportToMarkdown(context, conversation, selectedMessages)
                         toaster.show(
@@ -157,6 +162,7 @@ fun ChatExportSheet(
                 val imageSuccessMessage =
                     stringResource(id = R.string.chat_page_export_success, "Image")
                 OutlinedCard(
+                    shape = ContinuousRoundedRectangle(20.dp, g2),
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Column {
@@ -193,6 +199,7 @@ fun ChatExportSheet(
                             horizontalArrangement = Arrangement.End
                         ) {
                             Button(
+                                shape = ContinuousCapsule(g2),
                                 onClick = {
                                     scope.launch {
                                         runCatching {

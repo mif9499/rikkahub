@@ -1,7 +1,6 @@
 package me.rerere.rikkahub.ui.components.ai
 
 import androidx.compose.foundation.LocalIndication
-import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -21,8 +20,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AssistChip
+import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -68,6 +67,7 @@ import com.composables.icons.lucide.Lucide
 import com.composables.icons.lucide.Search
 import com.composables.icons.lucide.Type
 import com.composables.icons.lucide.X
+import com.kyant.capsule.ContinuousRoundedRectangle
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
@@ -87,6 +87,7 @@ import me.rerere.rikkahub.ui.components.ui.TagType
 import me.rerere.rikkahub.ui.components.ui.icons.HeartIcon
 import me.rerere.rikkahub.ui.context.LocalNavController
 import me.rerere.rikkahub.ui.theme.extendColors
+import me.rerere.rikkahub.ui.theme.presets.g2
 import me.rerere.rikkahub.utils.toDp
 import org.koin.compose.koinInject
 import sh.calvin.reorderable.ReorderableItem
@@ -172,10 +173,11 @@ fun ModelSelector(
                 popup = false
             },
             sheetState = state,
+            shape = ContinuousRoundedRectangle(32.dp, g2)
         ) {
             Column(
                 modifier = Modifier
-                    .padding(8.dp)
+                    .padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
                     .fillMaxHeight(0.8f)
                     .imePadding(),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
@@ -323,7 +325,7 @@ private fun ColumnScope.ModelList(
     }
 
     Surface(
-        shape = RoundedCornerShape(50),
+        shape = ContinuousRoundedRectangle(50),
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 8.dp),
@@ -337,7 +339,7 @@ private fun ColumnScope.ModelList(
                     text = stringResource(R.string.model_list_search_placeholder),
                 )
             },
-            shape = RoundedCornerShape(50),
+            shape = ContinuousRoundedRectangle(50),
             colors = TextFieldDefaults.colors(
                 unfocusedIndicatorColor = Color.Transparent,
                 focusedIndicatorColor = Color.Transparent,
@@ -566,6 +568,7 @@ private fun ColumnScope.ModelList(
                     leadingIcon = {
                         AutoAIIcon(name = provider.name, modifier = Modifier.size(16.dp))
                     },
+                    colors = AssistChipDefaults.assistChipColors(MaterialTheme.colorScheme.surface)
                 )
             }
         }
@@ -590,7 +593,8 @@ private fun ModelItem(
         colors = CardDefaults.cardColors(
             containerColor = if (select) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surface,
             contentColor = if (select) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface,
-        )
+        ),
+        shape = ContinuousRoundedRectangle(20.dp, g2)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -620,8 +624,7 @@ private fun ModelItem(
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 Surface(
-                    color = MaterialTheme.colorScheme.secondaryContainer,
-                    shape = MaterialTheme.shapes.small,
+                    color = Color(0x00000000)
                 ) {
                     AutoAIIcon(
                         name = model.modelId,

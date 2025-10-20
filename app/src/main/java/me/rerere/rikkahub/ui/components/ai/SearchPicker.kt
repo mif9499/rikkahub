@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -41,6 +40,7 @@ import com.composables.icons.lucide.Earth
 import com.composables.icons.lucide.Lucide
 import com.composables.icons.lucide.Search
 import com.composables.icons.lucide.Settings2
+import com.kyant.capsule.ContinuousRoundedRectangle
 import kotlinx.coroutines.launch
 import me.rerere.ai.provider.BuiltInTools
 import me.rerere.ai.provider.Model
@@ -50,12 +50,10 @@ import me.rerere.rikkahub.Screen
 import me.rerere.rikkahub.data.datastore.Settings
 import me.rerere.rikkahub.data.datastore.SettingsStore
 import me.rerere.rikkahub.ui.components.ui.AutoAIIcon
-import me.rerere.rikkahub.ui.components.ui.Tag
-import me.rerere.rikkahub.ui.components.ui.TagType
 import me.rerere.rikkahub.ui.components.ui.ToggleSurface
 import me.rerere.rikkahub.ui.context.LocalNavController
 import me.rerere.rikkahub.ui.pages.setting.SearchAbilityTagLine
-import me.rerere.search.SearchService
+import me.rerere.rikkahub.ui.theme.presets.g2
 import me.rerere.search.SearchServiceOptions
 import org.koin.compose.koinInject
 
@@ -106,13 +104,14 @@ fun SearchPickerButton(
     if (showSearchPicker) {
         ModalBottomSheet(
             onDismissRequest = { showSearchPicker = false },
-            sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+            sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+            shape = ContinuousRoundedRectangle(32.dp, g2)
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .fillMaxHeight(0.7f)
-                    .padding(16.dp),
+                    .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
@@ -184,7 +183,9 @@ private fun AppSearchSettings(
     settings: Settings,
     onUpdateSearchService: (Int) -> Unit
 ) {
-    Card {
+    Card(
+        shape = ContinuousRoundedRectangle(20.dp, g2)
+    ) {
         Row(
             modifier = Modifier
                 .padding(horizontal = 16.dp, vertical = 12.dp)
@@ -255,7 +256,7 @@ private fun AppSearchSettings(
                 onClick = {
                     onUpdateSearchService(index)
                 },
-                shape = RoundedCornerShape(50),
+                shape = ContinuousRoundedRectangle(50),
             ) {
                 Row(
                     modifier = Modifier
@@ -287,10 +288,13 @@ private fun AppSearchSettings(
 }
 
 @Composable
+
 private fun BuiltInSearchSetting(model: Model) {
     val settingsStore = koinInject<SettingsStore>()
     val scope = rememberCoroutineScope()
-    Card {
+    Card(
+        shape = ContinuousRoundedRectangle(20.dp, g2)
+    ) {
         Row(
             modifier = Modifier
                 .padding(horizontal = 16.dp, vertical = 12.dp)

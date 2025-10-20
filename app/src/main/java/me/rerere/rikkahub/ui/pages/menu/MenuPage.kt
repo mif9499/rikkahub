@@ -30,12 +30,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import com.kyant.capsule.ContinuousRoundedRectangle
 import me.rerere.rikkahub.R
 import me.rerere.rikkahub.Screen
-import me.rerere.rikkahub.ui.components.ui.Greeting
 import me.rerere.rikkahub.ui.components.nav.BackButton
 import me.rerere.rikkahub.ui.components.ui.Favicon
+import me.rerere.rikkahub.ui.components.ui.Greeting
 import me.rerere.rikkahub.ui.context.LocalNavController
+import me.rerere.rikkahub.ui.theme.presets.g2
 import me.rerere.rikkahub.utils.openUrl
 import me.rerere.rikkahub.utils.plus
 import okhttp3.HttpUrl.Companion.toHttpUrl
@@ -84,7 +86,7 @@ private fun FeaturesSection() {
     ) {
         Box(
             modifier = modifier
-                .clip(MaterialTheme.shapes.medium)
+                .clip(ContinuousRoundedRectangle(20.dp, g2))
                 .clickable { onClick() }
                 .height(150.dp)
                 .wrapContentHeight()
@@ -121,7 +123,7 @@ private fun FeaturesSection() {
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.Crop
                 )
-            },
+            }
         ) {
             navController.navigate(Screen.Translator)
         }
@@ -172,7 +174,8 @@ private fun LeaderBoard() {
             onClick = {
                 context.openUrl(url)
             },
-            modifier = modifier.widthIn(min = 150.dp)
+            modifier = modifier.widthIn(min = 150.dp),
+            shape = ContinuousRoundedRectangle(20.dp, g2)
         ) {
             Column(
                 modifier = Modifier.padding(8.dp),

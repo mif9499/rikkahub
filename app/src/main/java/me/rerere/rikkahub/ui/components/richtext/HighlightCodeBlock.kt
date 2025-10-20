@@ -40,6 +40,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.kyant.capsule.ContinuousRoundedRectangle
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -56,6 +57,7 @@ import me.rerere.rikkahub.ui.theme.AtomOneDarkPalette
 import me.rerere.rikkahub.ui.theme.AtomOneLightPalette
 import me.rerere.rikkahub.ui.theme.JetbrainsMono
 import me.rerere.rikkahub.ui.theme.LocalDarkMode
+import me.rerere.rikkahub.ui.theme.presets.g2
 import me.rerere.rikkahub.utils.base64Encode
 import kotlin.time.Clock
 
@@ -96,9 +98,9 @@ fun HighlightCodeBlock(
 
     Column(
         modifier = modifier
-            .clip(RoundedCornerShape(4.dp))
+            .clip(ContinuousRoundedRectangle(12.dp, g2))
             .background(MaterialTheme.colorScheme.surfaceContainer)
-            .padding(8.dp),
+            .padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 12.dp),
     ) {
         HighlightCodeActions(
             language = language,

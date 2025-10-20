@@ -57,6 +57,7 @@ import androidx.core.net.toFile
 import androidx.core.net.toUri
 import com.composables.icons.lucide.File
 import com.composables.icons.lucide.Lucide
+import com.kyant.capsule.ContinuousRoundedRectangle
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.debounce
 import kotlinx.serialization.json.JsonObject
@@ -83,6 +84,7 @@ import me.rerere.rikkahub.ui.components.ui.Favicon
 import me.rerere.rikkahub.ui.context.LocalNavController
 import me.rerere.rikkahub.ui.context.LocalSettings
 import me.rerere.rikkahub.ui.theme.extendColors
+import me.rerere.rikkahub.ui.theme.presets.g2
 import me.rerere.rikkahub.utils.JsonInstant
 import me.rerere.rikkahub.utils.base64Encode
 import me.rerere.rikkahub.utils.openUrl
@@ -306,7 +308,7 @@ private fun MessagePartsBlock(
                 Card(
                     modifier = Modifier
                         .animateContentSize(),
-                    shape = MaterialTheme.shapes.medium,
+                    shape = ContinuousRoundedRectangle(12.dp, g2),
                 ) {
                     Column(modifier = Modifier.padding(8.dp)) {
                         MarkdownBlock(

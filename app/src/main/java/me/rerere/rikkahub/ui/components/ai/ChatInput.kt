@@ -43,7 +43,6 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.DropdownMenu
@@ -100,6 +99,7 @@ import com.composables.icons.lucide.Plus
 import com.composables.icons.lucide.X
 import com.composables.icons.lucide.Zap
 import com.dokar.sonner.ToastType
+import com.kyant.capsule.ContinuousRoundedRectangle
 import com.yalantis.ucrop.UCrop
 import com.yalantis.ucrop.UCropActivity
 import me.rerere.ai.provider.Model
@@ -108,10 +108,10 @@ import me.rerere.ai.provider.ModelType
 import me.rerere.ai.ui.UIMessagePart
 import me.rerere.common.android.appTempFolder
 import me.rerere.rikkahub.R
+import me.rerere.rikkahub.data.ai.mcp.McpManager
 import me.rerere.rikkahub.data.datastore.Settings
 import me.rerere.rikkahub.data.datastore.getCurrentAssistant
 import me.rerere.rikkahub.data.datastore.getCurrentChatModel
-import me.rerere.rikkahub.data.ai.mcp.McpManager
 import me.rerere.rikkahub.data.model.Assistant
 import me.rerere.rikkahub.data.model.Conversation
 import me.rerere.rikkahub.ui.components.ui.KeepScreenOn
@@ -121,6 +121,7 @@ import me.rerere.rikkahub.ui.components.ui.permission.rememberPermissionState
 import me.rerere.rikkahub.ui.context.LocalSettings
 import me.rerere.rikkahub.ui.context.LocalToaster
 import me.rerere.rikkahub.ui.hooks.ChatInputState
+import me.rerere.rikkahub.ui.theme.presets.g2
 import me.rerere.rikkahub.utils.createChatFilesByContents
 import me.rerere.rikkahub.utils.deleteChatFiles
 import me.rerere.rikkahub.utils.getFileMimeType
@@ -348,7 +349,7 @@ private fun TextInputRow(
     ) {
         // TextField
         Surface(
-            shape = RoundedCornerShape(32.dp),
+            shape = ContinuousRoundedRectangle(32.dp, g2),
             tonalElevation = 4.dp,
             modifier = Modifier.weight(1f)
         ) {
@@ -410,7 +411,7 @@ private fun TextInputRow(
                         .onFocusChanged {
                             isFocused = it.isFocused
                         },
-                    shape = RoundedCornerShape(32.dp),
+                    shape = ContinuousRoundedRectangle(32.dp, g2),
                     placeholder = {
                         Text(stringResource(R.string.chat_input_placeholder))
                     },
@@ -513,7 +514,7 @@ private fun MediaFileInputRow(
             Box {
                 Surface(
                     modifier = Modifier.size(48.dp),
-                    shape = RoundedCornerShape(8.dp),
+                    shape = ContinuousRoundedRectangle(8.dp, g2),
                     tonalElevation = 4.dp
                 ) {
                     AsyncImage(
@@ -548,7 +549,7 @@ private fun MediaFileInputRow(
                         modifier = Modifier
                             .height(48.dp)
                             .widthIn(max = 128.dp),
-                        shape = RoundedCornerShape(8.dp),
+                        shape = ContinuousRoundedRectangle(8.dp, g2),
                         tonalElevation = 4.dp
                     ) {
                         CompositionLocalProvider(
@@ -714,7 +715,7 @@ private fun FullScreenEditor(
                 modifier = Modifier
                     .widthIn(max = 800.dp)
                     .fillMaxHeight(0.9f),
-                shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)
+                shape = ContinuousRoundedRectangle(topStart = 32.dp, topEnd = 32.dp, continuity = g2)
             ) {
                 Column(
                     modifier = Modifier
@@ -737,7 +738,7 @@ private fun FullScreenEditor(
                         modifier = Modifier
                             .padding(bottom = 2.dp)
                             .fillMaxSize(),
-                        shape = RoundedCornerShape(32.dp),
+                        shape = ContinuousRoundedRectangle(32.dp, g2),
                         placeholder = {
                             Text(stringResource(R.string.chat_input_placeholder))
                         },
@@ -1016,7 +1017,7 @@ private fun BigIconTextButton(
     val interactionSource = remember { MutableInteractionSource() }
     Column(
         modifier = modifier
-            .clip(RoundedCornerShape(8.dp))
+            .clip(ContinuousRoundedRectangle(8.dp, g2))
             .clickable(
                 interactionSource = interactionSource,
                 indication = LocalIndication.current,
@@ -1031,7 +1032,7 @@ private fun BigIconTextButton(
     ) {
         Surface(
             tonalElevation = 2.dp,
-            shape = RoundedCornerShape(8.dp)
+            shape = ContinuousRoundedRectangle(20.dp, g2)
         ) {
             Box(
                 modifier = Modifier
