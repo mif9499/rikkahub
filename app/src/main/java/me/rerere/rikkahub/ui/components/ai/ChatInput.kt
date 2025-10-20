@@ -349,7 +349,7 @@ private fun TextInputRow(
     ) {
         // TextField
         Surface(
-            shape = ContinuousRoundedRectangle(32.dp, g2),
+            shape = ContinuousRoundedRectangle(28.dp, g2),
             tonalElevation = 4.dp,
             modifier = Modifier.weight(1f)
         ) {
@@ -411,7 +411,7 @@ private fun TextInputRow(
                         .onFocusChanged {
                             isFocused = it.isFocused
                         },
-                    shape = ContinuousRoundedRectangle(32.dp, g2),
+                    shape = ContinuousRoundedRectangle(28.dp, g2),
                     placeholder = {
                         Text(stringResource(R.string.chat_input_placeholder))
                     },

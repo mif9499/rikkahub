@@ -26,6 +26,8 @@ import androidx.compose.ui.util.fastForEach
 import com.composables.icons.lucide.ChevronDown
 import com.composables.icons.lucide.ChevronUp
 import com.composables.icons.lucide.Lucide
+import com.kyant.capsule.ContinuousRoundedRectangle
+import me.rerere.rikkahub.ui.theme.presets.g2
 
 @Composable
 fun <T> Select(
@@ -47,7 +49,7 @@ fun <T> Select(
     ) {
         Surface(
             tonalElevation = 4.dp,
-            shape = RoundedCornerShape(50),
+            shape = ContinuousRoundedRectangle(50, g2),
             modifier = Modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable)
         ) {
             Row(

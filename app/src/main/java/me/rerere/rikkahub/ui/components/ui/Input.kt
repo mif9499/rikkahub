@@ -1,5 +1,6 @@
 package me.rerere.rikkahub.ui.components.ui
 
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -14,6 +15,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun <T : Number> OutlinedNumberInput(
@@ -25,6 +27,7 @@ fun <T : Number> OutlinedNumberInput(
 ) {
     var textFieldValue by remember(value) { mutableStateOf(value.toString()) }
     OutlinedTextField(
+        shape = RoundedCornerShape(4.dp),
         modifier = modifier,
         value = textFieldValue,
         onValueChange = { newValue ->

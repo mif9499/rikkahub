@@ -67,6 +67,7 @@ import com.composables.icons.lucide.Import
 import com.composables.icons.lucide.Lucide
 import com.composables.icons.lucide.Upload
 import com.dokar.sonner.ToastType
+import com.kyant.capsule.ContinuousRoundedRectangle
 import kotlinx.coroutines.launch
 import me.rerere.rikkahub.R
 import me.rerere.rikkahub.data.datastore.WebDavConfig
@@ -75,6 +76,7 @@ import me.rerere.rikkahub.ui.components.nav.BackButton
 import me.rerere.rikkahub.ui.components.ui.FormItem
 import me.rerere.rikkahub.ui.components.ui.StickyHeader
 import me.rerere.rikkahub.ui.context.LocalToaster
+import me.rerere.rikkahub.ui.theme.presets.g2
 import me.rerere.rikkahub.utils.fileSizeToString
 import me.rerere.rikkahub.utils.onError
 import me.rerere.rikkahub.utils.onLoading
@@ -176,7 +178,9 @@ private fun WebDavPage(
             .imePadding(),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        Card {
+        Card(
+            shape = ContinuousRoundedRectangle(20.dp, g2)
+        ) {
             Column(
                 modifier = Modifier.padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -242,7 +246,9 @@ private fun WebDavPage(
             }
         }
 
-        Card {
+        Card(
+            shape = ContinuousRoundedRectangle(20.dp, g2)
+        ) {
             FormItem(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -653,6 +659,7 @@ private fun ImportExportPage(
 
         item {
             Card(
+                shape = ContinuousRoundedRectangle(20.dp, g2),
                 onClick = {
                     if (!isExporting) {
                         val timestamp = LocalDateTime.now()
@@ -688,6 +695,7 @@ private fun ImportExportPage(
 
         item {
             Card(
+                shape = ContinuousRoundedRectangle(20.dp, g2),
                 onClick = {
                     if (!isRestoring) {
                         importType = "local"
@@ -728,6 +736,7 @@ private fun ImportExportPage(
 
         item {
             Card(
+                shape = ContinuousRoundedRectangle(20.dp, g2),
                 onClick = {
                     if (!isRestoring) {
                         importType = "chatbox"

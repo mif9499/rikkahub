@@ -42,6 +42,7 @@ import com.composables.icons.lucide.MessageCircle
 import com.composables.icons.lucide.MessageSquareMore
 import com.composables.icons.lucide.NotebookTabs
 import com.composables.icons.lucide.Settings2
+import com.kyant.capsule.ContinuousRoundedRectangle
 import me.rerere.ai.provider.ModelType
 import me.rerere.rikkahub.R
 import me.rerere.rikkahub.data.ai.prompts.DEFAULT_LEARNING_MODE_PROMPT
@@ -53,6 +54,7 @@ import me.rerere.rikkahub.data.datastore.Settings
 import me.rerere.rikkahub.ui.components.ai.ModelSelector
 import me.rerere.rikkahub.ui.components.nav.BackButton
 import me.rerere.rikkahub.ui.components.ui.FormItem
+import me.rerere.rikkahub.ui.theme.presets.g2
 import me.rerere.rikkahub.utils.plus
 import org.koin.androidx.compose.koinViewModel
 
@@ -599,6 +601,7 @@ private fun ModelFeatureCard(
     actions: @Composable RowScope.() -> Unit
 ) {
     Card(
+        shape = ContinuousRoundedRectangle(20.dp, g2),
         modifier = modifier,
     ) {
         Column(

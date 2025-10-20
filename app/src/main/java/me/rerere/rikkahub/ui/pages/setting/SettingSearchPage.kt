@@ -49,6 +49,7 @@ import com.composables.icons.lucide.Plus
 import com.composables.icons.lucide.SquarePen
 import com.composables.icons.lucide.Trash2
 import com.composables.icons.lucide.X
+import com.kyant.capsule.ContinuousRoundedRectangle
 import me.rerere.rikkahub.R
 import me.rerere.rikkahub.data.datastore.Settings
 import me.rerere.rikkahub.ui.components.nav.BackButton
@@ -58,6 +59,7 @@ import me.rerere.rikkahub.ui.components.ui.OutlinedNumberInput
 import me.rerere.rikkahub.ui.components.ui.Select
 import me.rerere.rikkahub.ui.components.ui.Tag
 import me.rerere.rikkahub.ui.components.ui.TagType
+import me.rerere.rikkahub.ui.theme.presets.g2
 import me.rerere.rikkahub.utils.plus
 import me.rerere.search.SearchCommonOptions
 import me.rerere.search.SearchService
@@ -224,6 +226,7 @@ private fun SearchProviderCard(
     }
     var expand by remember { mutableStateOf(false) }
     Card(
+        shape = ContinuousRoundedRectangle(20.dp, g2),
         modifier = modifier
     ) {
         Column(
@@ -525,7 +528,9 @@ private fun CommonOptions(
     var commonOptions by remember(settings.searchCommonOptions) {
         mutableStateOf(settings.searchCommonOptions)
     }
-    Card {
+    Card(
+        shape = ContinuousRoundedRectangle(20.dp, g2)
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()

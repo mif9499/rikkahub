@@ -55,6 +55,7 @@ import com.composables.icons.lucide.Plus
 import com.composables.icons.lucide.Settings2
 import com.composables.icons.lucide.Trash2
 import com.composables.icons.lucide.Volume2
+import com.kyant.capsule.ContinuousRoundedRectangle
 import me.rerere.rikkahub.R
 import me.rerere.rikkahub.data.datastore.DEFAULT_SYSTEM_TTS_ID
 import me.rerere.rikkahub.ui.components.nav.BackButton
@@ -64,6 +65,7 @@ import me.rerere.rikkahub.ui.components.ui.TagType
 import me.rerere.rikkahub.ui.context.LocalNavController
 import me.rerere.rikkahub.ui.context.LocalTTSState
 import me.rerere.rikkahub.ui.pages.setting.components.TTSProviderConfigure
+import me.rerere.rikkahub.ui.theme.presets.g2
 import me.rerere.rikkahub.utils.plus
 import me.rerere.tts.provider.TTSProviderSetting
 import org.koin.androidx.compose.koinViewModel
@@ -321,6 +323,7 @@ private fun TTSProviderItem(
     val isAvailable by tts.isAvailable.collectAsState()
 
     Card(
+        shape = ContinuousRoundedRectangle(20.dp, g2),
         modifier = modifier,
         colors = CardDefaults.cardColors(
             containerColor = if (isSelected) {

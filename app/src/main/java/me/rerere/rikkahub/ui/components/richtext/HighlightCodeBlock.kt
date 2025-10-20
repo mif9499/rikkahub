@@ -145,7 +145,7 @@ private fun HighlightCodeActions(
     navController: NavHostController
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().padding(bottom = 2.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
