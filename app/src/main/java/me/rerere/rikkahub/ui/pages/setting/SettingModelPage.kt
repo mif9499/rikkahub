@@ -152,6 +152,7 @@ private fun DefaultTranslationModelSetting(
 
     if (showModal) {
         ModalBottomSheet(
+            shape = ContinuousRoundedRectangle(topStart = 32.dp, topEnd = 32.dp, continuity = g2),
             onDismissRequest = {
                 showModal = false
             },
@@ -248,6 +249,7 @@ private fun DefaultSuggestionModelSetting(
 
     if (showModal) {
         ModalBottomSheet(
+            shape = ContinuousRoundedRectangle(topStart = 32.dp, topEnd = 32.dp, continuity = g2),
             onDismissRequest = {
                 showModal = false
             },
@@ -340,6 +342,7 @@ private fun DefaultTitleModelSetting(
 
     if (showModal) {
         ModalBottomSheet(
+            shape = ContinuousRoundedRectangle(topStart = 32.dp, topEnd = 32.dp, continuity = g2),
             onDismissRequest = {
                 showModal = false
             },
@@ -452,6 +455,7 @@ private fun LearningModePromptSetting(
 
     if (showModal) {
         ModalBottomSheet(
+            shape = ContinuousRoundedRectangle(topStart = 32.dp, topEnd = 32.dp, continuity = g2),
             onDismissRequest = {
                 showModal = false
             },
@@ -544,6 +548,7 @@ private fun DefaultOcrModelSetting(
 
     if (showModal) {
         ModalBottomSheet(
+            shape = ContinuousRoundedRectangle(topStart = 32.dp, topEnd = 32.dp, continuity = g2),
             onDismissRequest = {
                 showModal = false
             },

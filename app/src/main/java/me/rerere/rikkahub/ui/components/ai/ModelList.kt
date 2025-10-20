@@ -173,7 +173,7 @@ fun ModelSelector(
                 popup = false
             },
             sheetState = state,
-            shape = ContinuousRoundedRectangle(32.dp, g2)
+            shape = ContinuousRoundedRectangle(topStart = 32.dp, topEnd = 32.dp, continuity = g2)
         ) {
             Column(
                 modifier = Modifier
