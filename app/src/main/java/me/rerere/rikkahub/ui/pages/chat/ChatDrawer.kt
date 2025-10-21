@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.composables.icons.lucide.Download
 import com.composables.icons.lucide.Lucide
 import com.composables.icons.lucide.Settings2
@@ -71,12 +72,14 @@ fun ChatDrawerContent(
     vm: ChatVM,
     settings: Settings,
     current: Conversation,
-    conversations: List<Conversation>,
 ) {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     val isPlayStore = rememberIsPlayStoreVersion()
     val repo = koinInject<ConversationRepository>()
+
+    val conversations = vm.conversations.collectAsLazyPagingItems()
+    val searchQuery by vm.searchQuery.collectAsStateWithLifecycle()
 
     val conversationJobs by vm.conversationJobs.collectAsStateWithLifecycle(
         initialValue = emptyMap(),
@@ -98,6 +101,8 @@ fun ChatDrawerContent(
                 current = current,
                 conversations = conversations,
                 conversationJobs = conversationJobs.keys,
+                searchQuery = searchQuery,
+                onSearchQueryChange = { vm.updateSearchQuery(it) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f),
