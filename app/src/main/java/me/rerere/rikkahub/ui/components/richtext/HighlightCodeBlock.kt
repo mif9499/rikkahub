@@ -123,7 +123,7 @@ fun HighlightCodeBlock(
         modifier = modifier
             .clip(ContinuousRoundedRectangle(12.dp, g2))
             .background(MaterialTheme.colorScheme.surfaceContainer)
-            .padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 8.dp),
+            .padding(start = 12.dp, end = 12.dp, top = 12.dp, bottom = 8.dp),
     ) {
         HighlightCodeActions(
             language = language,
@@ -140,6 +140,9 @@ fun HighlightCodeBlock(
             )
             return
         }
+
+        Spacer(Modifier.height(8.dp))
+
         val textStyle = LocalTextStyle.current.merge(style)
         val codeLines = remember(code) { code.lines() }
         val collapsedCode = remember(codeLines) { codeLines.take(COLLAPSE_LINES).joinToString("\n") }
@@ -216,19 +219,19 @@ private fun HighlightCodeActions(
     navController: NavHostController,
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth().padding(bottom = 2.dp),
+        modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
             text = language,
             fontSize = 12.sp,
+            lineHeight = 12.sp,
             color = MaterialTheme.colorScheme.onSurfaceVariant
                 .copy(alpha = 0.5f),
         )
         Spacer(Modifier.weight(1f))
         Row(
             modifier = Modifier
-                .clip(RoundedCornerShape(4.dp))
                 .clickable {
                     scope.launch {
                         clipboardManager.setClipEntry(
@@ -237,13 +240,13 @@ private fun HighlightCodeActions(
                             )
                         )
                     }
-                }
-                .padding(1.dp),
+                },
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Text(
                 text = stringResource(id = R.string.chat_page_save),
                 fontSize = 12.sp,
+                lineHeight = 12.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
                 modifier = Modifier.clickable {
                     val extension = when (language.lowercase()) {
@@ -275,6 +278,7 @@ private fun HighlightCodeActions(
             Text(
                 text = stringResource(id = R.string.code_block_copy),
                 fontSize = 12.sp,
+                lineHeight = 12.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
                 modifier = Modifier.clickable {
                     scope.launch {
@@ -287,6 +291,7 @@ private fun HighlightCodeActions(
                 Text(
                     text = stringResource(id = R.string.code_block_preview),
                     fontSize = 12.sp,
+                    lineHeight = 12.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
                     modifier = Modifier
                         .clickable {
