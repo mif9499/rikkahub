@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -122,7 +123,7 @@ fun HighlightCodeBlock(
         modifier = modifier
             .clip(ContinuousRoundedRectangle(12.dp, g2))
             .background(MaterialTheme.colorScheme.surfaceContainer)
-            .padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 12.dp),
+            .padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 8.dp),
     ) {
         HighlightCodeActions(
             language = language,
@@ -166,6 +167,8 @@ fun HighlightCodeBlock(
             )
         }
 
+        Spacer(Modifier.height(4.dp))
+
         // 代码折叠按钮
         if (settings.displaySetting.codeBlockAutoCollapse && codeLines.size > COLLAPSE_LINES) {
             Box(
@@ -180,6 +183,7 @@ fun HighlightCodeBlock(
                         .align(Alignment.Center)
                         .padding(vertical = 4.dp),
                     horizontalArrangement = Arrangement.spacedBy(4.dp),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(
                         imageVector = if (isExpanded) Lucide.ChevronsUp else Lucide.ChevronsDown,
